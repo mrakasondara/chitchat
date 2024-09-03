@@ -1,12 +1,15 @@
-import RecentChat from "./RecentChat/RecentChat"
+import { Routes, Route } from "react-router"
 import Navbar from "./Navbar/Navbar"
-import StatusBar from "./StatusBar/StatusBar"
+import Home from "../pages/Home"
+import AddStatus from "../pages/AddStatus"
 const ChatApp = () =>{
     return(
         <div className="flex flex-col font-suse">
             <Navbar/> 
-            <StatusBar/>
-            <RecentChat/>
+            <Routes>
+                <Route index path="/" element={<Home/>}></Route>
+                <Route path="/addstatus" element={<AddStatus/>}></Route>
+            </Routes>
         </div>
     )
 }

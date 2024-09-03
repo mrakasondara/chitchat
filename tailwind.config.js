@@ -9,6 +9,7 @@ export default {
       },
       colors: {
         main: "#229799",
+        status: "#22979977",
       },
     },
   },
