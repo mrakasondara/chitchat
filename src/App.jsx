@@ -1,12 +1,15 @@
-import { BrowserRouter } from "react-router-dom"
-import ChatApp from "./components/ChatApp"
+import { BrowserRouter } from "react-router-dom";
+import UserContextProvider from "./UserContext";
+import ChatApp from "./components/ChatApp";
 
 function App() {
   return (
-  <BrowserRouter>
-   <ChatApp/>
-  </BrowserRouter>
-  )
+    <BrowserRouter>
+      <UserContextProvider>
+        <ChatApp />
+      </UserContextProvider>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

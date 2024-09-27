@@ -1,8 +1,13 @@
 import FormRegister from "../components/Register/FormRegister";
+import { createUser } from "../firebase/user/user";
+import { addUserToDatabase } from "../firebase/user/user";
 
 const Register = () => {
-  const onRegister = ({ fullName, username, password }) => {
-    console.log({ fullName, username, password });
+  const onRegister = async ({ email, password, displayName }) => {
+    const response = await createUser({ email, password, displayName });
+    if (response.email) {
+      await addUserToDatabase({ email, displayName, id: response.uid });
+    }
   };
   return (
     <div className="w-3/4 md:w-1/2 flex-col mx-auto bg-slate-50 shadow-lg mt-[5rem] rounded p-5">

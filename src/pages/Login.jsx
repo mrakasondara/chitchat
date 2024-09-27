@@ -1,8 +1,9 @@
 import FormLogin from "../components/Login/FormLogin";
+import { loginUser } from "../firebase/user/user";
 
 const Login = () => {
-  const onLogin = ({ username, password }) => {
-    // console.log({ username, password });
+  const onLogin = ({ email, password }) => {
+    loginUser({ email, password });
   };
 
   return (

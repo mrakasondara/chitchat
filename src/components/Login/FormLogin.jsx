@@ -3,10 +3,10 @@ import useInput from "../../hooks/useInput";
 import ButtonLogin from "./ButtonLogin";
 
 const FormLogin = ({ login }) => {
-  const [username, onUsernameChange] = useInput();
+  const [email, onEmailChange] = useInput();
   const [password, onPasswordChange] = useInput();
 
-  const propsButton = { login, username, password };
+  const propsButton = { login, email, password };
   return (
     <form action="" className="flex flex-col mt-3 gap-5">
       <label className="input input-bordered flex items-center gap-2 bg-white text-main hover:outline-main transition">
@@ -21,9 +21,9 @@ const FormLogin = ({ login }) => {
         <input
           type="text"
           className="grow text-main"
-          placeholder="Username"
-          value={username}
-          onChange={onUsernameChange}
+          placeholder="Email"
+          value={email}
+          onChange={onEmailChange}
         />
       </label>
 
@@ -49,7 +49,7 @@ const FormLogin = ({ login }) => {
         />
       </label>
 
-      <p className="ml-auto text-sm text-black">
+      <p className="ml-auto text-sm">
         Doesn`t have an account?{" "}
         <Link to="/register" className="text-main">
           Register
