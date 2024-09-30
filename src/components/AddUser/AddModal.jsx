@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { UserContext } from "../../UserContext";
 import { addFriend, isUserExist } from "../../firebase/user/user";
 import useInput from "../../hooks/useInput";
+import { AlertError, AlertSuccess } from "../../utils/Alert";
 
 const AddModal = () => {
   const [friendCode, onFriendCodeChange] = useInput("#");
@@ -9,18 +10,18 @@ const AddModal = () => {
 
   const onSearch = async (ev, friendCode) => {
     ev.preventDefault();
-    const { length, id } = await isUserExist(friendCode);
+    const { error, id } = await isUserExist(friendCode);
     const myId = userInfo.uid;
 
-    if (length && id != myId) {
+    if (!error && id != myId) {
       const { success, message } = await addFriend({ myId, targetId: id });
       if (!success) {
-        console.error(message);
+        AlertError(message);
       } else {
-        console.log(message);
+        AlertSuccess(message);
       }
     } else {
-      console.error("User not found!");
+      AlertError("User not found!");
     }
   };
   return (

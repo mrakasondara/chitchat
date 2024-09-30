@@ -6,8 +6,12 @@ const FormRegister = ({ register }) => {
   const [displayName, onDisplayNameChange] = useInput("");
   const [email, onEmailChange] = useInput("");
   const [password, onPasswordChange] = useInput("");
-
-  const buttonProps = { register, displayName, email, password };
+  const buttonProps = {
+    register,
+    displayName,
+    email,
+    password,
+  };
 
   return (
     <form action="" className="flex flex-col mt-3 gap-5">
