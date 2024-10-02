@@ -23,9 +23,7 @@ const Navbar = ({ onLogout }) => {
 
   return (
     <div
-      className={`navbar sticky top-0 z-20 ${
-        isActiveHeader ? "shadow-lg bg-slate-100" : ""
-      }`}
+      className={`navbar  ${isActiveHeader ? "shadow-lg bg-slate-100" : ""}`}
     >
       <div className="flex-1">
         <Link to="/" className="ml-5 text-4xl md:text-3xl font-bold text-main">

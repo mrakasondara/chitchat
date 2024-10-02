@@ -1,10 +1,12 @@
 import { IoPersonRemove } from "react-icons/io5";
 import { IoMdChatboxes } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { rejectRequest } from "../../firebase/user/user";
 import { AlertSuccess } from "../../utils/Alert";
+import { initialChatUserDatabase } from "../../firebase/chat/chat";
 
-const FriendItem = ({ id, displayName, myId }) => {
+const FriendItem = ({ id, displayName, myId, chat }) => {
+  const navigate = useNavigate();
   const onRemove = async () => {
     await rejectRequest({ myId, targetId: id });
     AlertSuccess("User has been removed");
@@ -12,6 +14,14 @@ const FriendItem = ({ id, displayName, myId }) => {
       location.reload();
     }, 1500);
   };
+
+  const onStartChat = async () => {
+    const chatId = await initialChatUserDatabase({ myId, targetId: id });
+    setTimeout(() => {
+      navigate(`/chat/${chatId}`);
+    }, 1500);
+  };
+
   return (
     <div className="w-full p-4 flex gap-5 shadow-lg rounded-md" key={id}>
       <div className="avatar">
@@ -31,13 +41,15 @@ const FriendItem = ({ id, displayName, myId }) => {
         >
           <IoPersonRemove />
         </button>
-        <Link
-          to={`/chat/1234`}
-          className="tooltip tooltip-top flex items-center justify-center rounded-full w-10 bg-success text-lg text-white text-center"
-          data-tip="start chat"
-        >
-          <IoMdChatboxes />
-        </Link>
+        {chat != "started" && (
+          <button
+            onClick={() => onStartChat()}
+            className="tooltip tooltip-top flex items-center justify-center rounded-full w-10 bg-success text-lg text-white text-center"
+            data-tip="start chat"
+          >
+            <IoMdChatboxes />
+          </button>
+        )}
       </div>
     </div>
   );

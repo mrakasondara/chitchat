@@ -172,6 +172,20 @@ const getUserData = async (userId) => {
   return value;
 };
 
+const getUserChatData = async (userId) => {
+  const dbRef = child(rootReference, `users/${userId}/chats`);
+  const dbGet = await get(dbRef);
+  const value = dbGet.val();
+  return value;
+};
+
+const getChatUserData = async ({ chatId, userId }) => {
+  const dbRef = child(rootReference, `chats/${chatId}/users/${userId}`);
+  const dbGet = await get(dbRef);
+  const value = dbGet.val();
+  return value;
+};
+
 const acceptRequest = async ({ myId, targetId }) => {
   // update myData
   const myDb = child(rootReference, `users/${myId}/friendList/${targetId}`);
@@ -220,4 +234,7 @@ export {
   getFriendByStatus,
   acceptRequest,
   rejectRequest,
+  getUserData,
+  getUserChatData,
+  getChatUserData,
 };

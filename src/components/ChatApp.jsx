@@ -9,6 +9,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import app from "../firebase/firebase-sdk";
 import { logout } from "../firebase/user/user";
 import Profile from "../pages/Profile";
+import Chat from "../pages/Chat";
 const ChatApp = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
 
@@ -47,6 +48,7 @@ const ChatApp = () => {
             path="/profile"
             element={<Profile id={id} displayName={displayName} />}
           ></Route>
+          <Route path="/chat/:id" element={<Chat userId={id} />}></Route>
           <Route path="*" element={<Home />}></Route>
         </Routes>
       </div>

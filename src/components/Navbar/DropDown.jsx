@@ -2,18 +2,14 @@ import { Link } from "react-router-dom";
 
 const DropDown = ({ onLogout }) => {
   return (
-    <div className="dropdown dropdown-end">
+    <div className="dropdown dropdown-end z-40">
       <div
         tabIndex={0}
         role="button"
         className="btn btn-ghost btn-circle avatar mt-1"
       >
         <div className="w-20 rounded-full">
-          <img
-            alt="Tailwind CSS Navbar component"
-            className="scale-150"
-            src="profile.jpg"
-          />
+          <img src="profile.jpg" alt="profile" className="scale-150" />
         </div>
       </div>
       <ul
