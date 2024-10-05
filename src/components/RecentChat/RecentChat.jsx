@@ -25,7 +25,7 @@ const RecentChat = () => {
     }
   }, [userInfo]);
   return (
-    <div className="py-5 px-[1.9rem] rounded-t-xl">
+    <div className=" py-5 px-[1.9rem] rounded-t-xl">
       <h4 className="text-xl">Recent Chat</h4>
       <Suspense fallback={<p>Loading...</p>}>
         {errorFetch && (

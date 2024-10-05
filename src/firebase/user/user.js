@@ -41,7 +41,7 @@ const loginUser = ({ email, password }) => {
 const addUserToDatabase = async ({ email, displayName, id }) => {
   const dbRef = child(rootReference, `users/${id}`);
   const friendCode = id.substring(0, 6);
-  const result = { email, displayName, id, friendCode };
+  const result = { email, displayName, id, friendCode, thumb: "none" };
   const dbSet = await set(dbRef, result);
   return dbSet;
 };
@@ -165,11 +165,28 @@ const getFriendByStatus = async ({ id, status }) => {
   return value;
 };
 
+const updateUserThumbData = async ({ userId, thumb }) => {
+  const path = child(rootReference, `users/${userId}`);
+  const oldData = await getUserData(userId);
+  const newData = {
+    ...oldData,
+    thumb: thumb.name,
+  };
+  await set(path, newData);
+};
+
 const getUserData = async (userId) => {
   const dbRef = child(rootReference, `users/${userId}`);
   const dbGet = await get(dbRef);
   const value = dbGet.val();
   return value;
+};
+
+const getUserThumbData = async (userId) => {
+  const dbRef = child(rootReference, `users/${userId}`);
+  const dbGet = await get(dbRef);
+  const value = dbGet.val();
+  return value.thumb;
 };
 
 const getUserChatData = async (userId) => {
@@ -237,4 +254,6 @@ export {
   getUserData,
   getUserChatData,
   getChatUserData,
+  getUserThumbData,
+  updateUserThumbData,
 };

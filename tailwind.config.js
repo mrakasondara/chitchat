@@ -11,20 +11,12 @@ export default {
         main: "#229799",
         status: "#22979977",
       },
+      backgroundImage: {
+        "bg-pattern": "url(/public/bg.svg)",
+      },
     },
   },
-  _plugins: [
-    daisyui,
-    // {
-    //   themes: [
-    //     {
-    //       mytheme: {
-    //         main: "#229799",
-    //       },
-    //     },
-    //   ],
-    // },
-  ],
+  _plugins: [daisyui],
   get plugins() {
     return this._plugins;
   },

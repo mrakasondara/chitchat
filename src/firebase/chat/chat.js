@@ -1,5 +1,5 @@
 import { get, set, child, getDatabase, ref, push } from "firebase/database";
-import { getChatUserData, getUserChatData, getUserData } from "../user/user";
+import { getUserData } from "../user/user";
 import app from "../firebase-sdk";
 
 const database = getDatabase(app);
@@ -105,110 +105,6 @@ const checkIsChatExist = (id) => {
     });
 };
 
-const sendMessage = async ({ chatId, myId, targetId, message }) => {
-  const date = new Date();
-  const getHours = date.getHours();
-  const getMinutes = date.getMinutes();
-  const lastTime = `${getHours}:${getMinutes}`;
-  const latestMessage = message;
-
-  await addMessageToChats({ message, chatId, myId, time: lastTime });
-
-  await updateLastTimeMessageAtUsers({
-    myId,
-    targetId,
-    latestMessage,
-    lastTime,
-  });
-
-  await updateLastTimeMessageAtChats({
-    chatId,
-    myId,
-    targetId,
-    latestMessage,
-    lastTime,
-  });
-};
-
-const updateLastTimeMessageAtUsers = async ({
-  myId,
-  targetId,
-  latestMessage,
-  lastTime,
-}) => {
-  const myPath = child(rootReference, `users/${myId}/chats/${targetId}`);
-  const targetPath = child(rootReference, `users/${targetId}/chats/${myId}`);
-
-  // update my chat at users data
-  const myValue = await getUserChatData(myId);
-  const myObjectValue = Object.values(myValue)[0];
-  const myNewData = {
-    ...myObjectValue,
-    lastTime,
-    latestMessage,
-  };
-
-  // update target chat at users data
-  const targetValue = await getUserChatData(targetId);
-  const targetObjectValue = Object.values(targetValue)[0];
-  const targetNewData = {
-    ...targetObjectValue,
-    lastTime,
-    latestMessage,
-  };
-
-  await set(myPath, myNewData);
-  await set(targetPath, targetNewData);
-};
-const updateLastTimeMessageAtChats = async ({
-  chatId,
-  myId,
-  targetId,
-  latestMessage,
-  lastTime,
-}) => {
-  const myPath = child(rootReference, `chats/${chatId}/users/${myId}`);
-  const targetPath = child(rootReference, `chats/${chatId}/users/${targetId}`);
-
-  const date = new Date();
-  const getHours = date.getHours();
-  const getMinutes = date.getMinutes();
-
-  // update my chat at users data
-  const myValue = await getChatUserData({ chatId, userId: myId });
-  const myNewData = {
-    ...myValue,
-    latestMessage,
-    lastTime,
-  };
-
-  // update target chat at users data
-  const targetValue = await getChatUserData({ chatId, userId: targetId });
-  const targetNewData = {
-    ...targetValue,
-    latestMessage,
-    lastTime,
-  };
-
-  await set(myPath, myNewData);
-  await set(targetPath, targetNewData);
-};
-
-const addMessageToChats = async ({ message, chatId, myId, time }) => {
-  const dbPath = child(rootReference, `chats/${chatId}/users/${myId}`);
-  const getKey = push(dbPath).key;
-  const setPath = child(
-    rootReference,
-    `chats/${chatId}/users/${myId}/chats/${getKey}`
-  );
-  const value = {
-    messageId: getKey,
-    message,
-    time,
-  };
-  return await set(setPath, value);
-};
-
 const checkIsMessageExist = async ({ chatId, userId }) => {
   return get(child(rootReference, `chats/${chatId}/users/${userId}/chats`))
     .then((snapshot) => {
@@ -258,7 +154,6 @@ export {
   initialChatUserDatabase,
   getHighlightChat,
   checkIsChatExist,
-  sendMessage,
   checkIsMessageExist,
   getChat,
 };

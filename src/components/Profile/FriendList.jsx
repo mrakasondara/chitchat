@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import FriendItem from "./FriendItem";
 
 const FriendList = ({ requests, myId }) => {
-  console.log(requests);
   return (
     <div className="w-full grid">
       <h2 className="font-bold text-main text-lg">

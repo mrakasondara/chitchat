@@ -2,9 +2,9 @@ import Search from "../Search/Search";
 import Add from "../AddUser/Add";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import DropDown from "./Dropdown";
+import DropDown from "./DropDown";
 
-const Navbar = ({ onLogout }) => {
+const Navbar = ({ onLogout, thumb }) => {
   const [isActiveHeader, setIsActiveHeader] = useState(false);
 
   const listenScrollEvent = () => {
@@ -33,7 +33,7 @@ const Navbar = ({ onLogout }) => {
       <div className="flex gap-2 px-5">
         <Search />
         <Add />
-        <DropDown onLogout={onLogout} />
+        <DropDown onLogout={onLogout} thumb={thumb} />
       </div>
     </div>
   );

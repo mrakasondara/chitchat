@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const DropDown = ({ onLogout }) => {
+const DropDown = ({ onLogout, thumb }) => {
   return (
     <div className="dropdown dropdown-end z-40">
       <div
@@ -9,7 +9,15 @@ const DropDown = ({ onLogout }) => {
         className="btn btn-ghost btn-circle avatar mt-1"
       >
         <div className="w-20 rounded-full">
-          <img src="profile.jpg" alt="profile" className="scale-150" />
+          <img
+            src={
+              thumb == "none"
+                ? "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                : thumb
+            }
+            alt="profile"
+            className="scale-150"
+          />
         </div>
       </div>
       <ul

@@ -2,9 +2,9 @@ import { IoMdSend } from "react-icons/io";
 import useInput from "../../hooks/useInput";
 
 const SendMessage = ({ onSubmit }) => {
-  const [message, onMessageChange] = useInput();
+  const [message, onMessageChange, setMessage] = useInput();
   return (
-    <form className="w-full flex justify-around md:justify-center md:gap-3 fixed bottom-0 bg-main p-3">
+    <form className="w-full flex justify-around md:justify-center md:gap-3 mt-auto bg-main p-3">
       <input
         type="text"
         className="w-3/4 md:w-1/2 p-3 rounded-lg bg-white text-main shadow-lg"
@@ -17,6 +17,7 @@ const SendMessage = ({ onSubmit }) => {
         className="avatar"
         onClick={(e) => {
           onSubmit({ e, message });
+          setMessage("");
         }}
       >
         <div className="w-14 shadow-lg border border-slate-400 relative rounded-full">
