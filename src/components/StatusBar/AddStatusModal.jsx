@@ -1,5 +1,5 @@
 import { IoIosAdd } from "react-icons/io";
-const AddStatus = () => {
+const AddStatusModal = () => {
   const addStatus = () => {
     document.getElementById("add-status-modal").show();
   };
@@ -17,4 +17,4 @@ const AddStatus = () => {
     </div>
   );
 };
-export default AddStatus;
+export default AddStatusModal;

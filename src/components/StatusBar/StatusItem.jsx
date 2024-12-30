@@ -1,22 +1,22 @@
-const StatusItem = ({ image, name, isRead }) => {
+const StatusItem = ({ thumb, displayName, id, isRead = false }) => {
   const showStatus = () => {
-    document.getElementById("show-status-modal").show();
+    document.getElementById(`show-status-modal-${id}`).show();
   };
   return (
     <div
-      className="avatar flex flex-col block w-20 items-center"
+      className="avatar flex flex-col block w-20 items-center snap-always snap-center"
       onClick={showStatus}
     >
       <div
         className={`w-20 rounded-full ${
           isRead
-            ? "border-main border-2 cursor-pointer"
-            : "border-slate-300 border-2"
+            ? `border-main border-2 cursor-pointer border-main border-2 border-slate-100`
+            : `border-main border-2 cursor-pointer `
         }`}
       >
-        <img src={image} />
+        <img src={thumb ? thumb : ""} alt="thumb" />
       </div>
-      <h5 className="text-main font-semibold">{name}</h5>
+      <h5 className="text-main font-semibold">{displayName}</h5>
     </div>
   );
 };
