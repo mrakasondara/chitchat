@@ -1,9 +1,15 @@
 import FormLogin from "../components/Login/FormLogin";
 import { loginUser } from "../firebase/user/user";
+import { AlertError, AlertSuccess } from "../utils/Alert";
 
 const Login = () => {
-  const onLogin = ({ email, password }) => {
-    loginUser({ email, password });
+  const onLogin = async ({ email, password }) => {
+    const { error, data = {}, message } = await loginUser({ email, password });
+    if (error) {
+      AlertError("Login Failed - Wrong Email or Password");
+    } else {
+      AlertSuccess("Login Success");
+    }
   };
 
   return (

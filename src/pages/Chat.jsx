@@ -66,7 +66,7 @@ const Chat = ({ userId }) => {
       { message, chatId: id, userId, targetId },
       (err) => {
         if (err) {
-          Alert(err);
+          alert(err);
         }
       }
     );

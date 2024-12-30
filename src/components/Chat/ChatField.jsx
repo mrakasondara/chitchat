@@ -1,7 +1,7 @@
 import TargetMessage from "./TargetMessage";
 import MyMessage from "./MyMessage";
 
-const ChatField = ({ messages, userId, targetId }) => {
+const ChatField = ({ messages, userId }) => {
   const sortedMessages = messages.sort(
     (a, b) => new Date(a.date) - new Date(b.date)
   );
