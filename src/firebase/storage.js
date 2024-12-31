@@ -1,9 +1,9 @@
 import {
   getStorage,
   ref,
-  uploadBytesResumable,
   getDownloadURL,
   uploadBytes,
+  deleteObject,
 } from "firebase/storage";
 import app from "./firebase-sdk";
 
@@ -30,4 +30,36 @@ const addImageToStorage = async (image, uid) => {
       });
   });
 };
-export { addImageToStorage, getImageFromStorage };
+const addImageStatus = async ({ thumb, name }) => {
+  const storage = getStorage(app);
+  const storageRef = ref(storage, `users/${name}`);
+  const blob = new Blob([thumb]);
+  const metadata = {
+    contentType: "image/jpeg",
+  };
+  return uploadBytes(storageRef, blob, metadata).then((snapshot) => {
+    getDownloadURL(snapshot.ref)
+      .then((url) => {
+        return { success: true, url };
+      })
+      .catch((err) => {
+        return { success: false, err };
+      });
+  });
+};
+
+const deleteImageFromStorage = async ({ userId, id }) => {
+  const storage = getStorage(app);
+  const storageRef = ref(storage, `users/${userId}-${id}`);
+
+  await deleteObject(storageRef).then((res) => {
+    return res;
+  });
+};
+
+export {
+  addImageToStorage,
+  getImageFromStorage,
+  addImageStatus,
+  deleteImageFromStorage,
+};

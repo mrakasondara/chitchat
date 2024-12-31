@@ -22,6 +22,11 @@ const StatusList = ({ statuses, setStatuses }) => {
   return (
     <div className="flex gap-5">
       <AddStatusModal />
+      {!statuses.length ? (
+        <p className="text-red-300 flex items-center">No Status</p>
+      ) : (
+        ""
+      )}
       {singleStatus?.length > 0 &&
         singleStatus.map((status, index) => (
           <div key={status.id}>

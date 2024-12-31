@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import RecentChat from "../components/RecentChat/RecentChat";
-import { addStatus, getStatuses } from "../firebase/status/status";
+import {
+  addStatus,
+  deleteExpiredStatus,
+  getStatuses,
+} from "../firebase/status/status";
 import { UserContext } from "../UserContext";
 import AddStatus from "../components/Status/AddStatus";
 import ShowStatus from "../components/Status/ShowStatus";
@@ -21,7 +25,15 @@ const Home = () => {
     };
     if (userInfo.uid) {
       fetchStatuses().catch();
-      console.log(statuses);
+      if (statuses.length) {
+        statuses.forEach((status) => {
+          deleteExpiredStatus({
+            userId: status.userId,
+            statusDateExpire: status.dateExpire,
+            id: status.id,
+          });
+        });
+      }
     }
   }, [ENDPOINT]);
 

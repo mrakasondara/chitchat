@@ -1,5 +1,8 @@
-const ShowStatus = ({ displayName, date, desc, thumb, id }) => {
+import { checkIsStatusExpired } from "../../firebase/status/status";
+
+const ShowStatus = ({ displayName, date, desc, thumb, id, dateExpire }) => {
   const statusDate = new Date(date);
+  const isExpire = checkIsStatusExpired(dateExpire);
   const time = `${statusDate.getHours()}:${statusDate.getMinutes()}`;
   return (
     <dialog id={`show-status-modal-${id}`} className="modal bg-status">
