@@ -45,7 +45,7 @@ const FriendItem = ({ id, displayName, myId, chat }) => {
           <img
             src={
               thumb == "none"
-                ? "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                ? "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 : thumb
             }
           />

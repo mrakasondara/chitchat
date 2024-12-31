@@ -1,17 +1,17 @@
 import { Suspense } from "react";
 import FriendItem from "./FriendItem";
 
-const FriendList = ({ requests, myId }) => {
+const FriendList = ({ friends, myId }) => {
   return (
     <div className="w-full grid">
       <h2 className="font-bold text-main text-lg">
-        {requests != null && <span>Friend List ({requests.length})</span>}
-        {requests == null && <span>Friend List (0)</span>}
+        {friends != null && <span>Friend List ({friends.length})</span>}
+        {friends == null && <span>Friend List (0)</span>}
       </h2>
-      {requests != null && (
+      {friends != null && (
         <Suspense fallback={<p>Loading ...</p>}>
-          {requests.length >= 1 &&
-            requests.map((req) => (
+          {friends.length >= 1 &&
+            friends.map((req) => (
               <FriendItem {...req} key={req.id} myId={myId} />
             ))}
         </Suspense>

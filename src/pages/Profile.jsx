@@ -32,8 +32,8 @@ const Profile = ({ id, displayName, thumb }) => {
     };
 
     if (id) {
-      getFriendRequests().catch(console.error);
-      getFriendList().catch(console.error);
+      getFriendRequests().catch();
+      getFriendList().catch();
     }
     setImage(thumb);
   }, [id, thumb]);
@@ -74,7 +74,7 @@ const Profile = ({ id, displayName, thumb }) => {
         </p>
         <Suspense fallback={<p>Loading ...</p>}>
           <FriendRequests requests={friendRequests} myId={id ? id : ""} />
-          <FriendList requests={friendList} myId={id ? id : ""} />
+          <FriendList friends={friendList} myId={id ? id : ""} />
         </Suspense>
       </div>
     </div>
