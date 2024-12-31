@@ -150,10 +150,17 @@ const flagChatHasInitialized = async ({ myId, targetId }) => {
   await set(targetPath, targetNewData);
 };
 
+const searchChatByUserName = ({ chats, keyword }) => {
+  return chats.filter((chat) =>
+    chat.displayName.toLowerCase().includes(keyword.toLowerCase())
+  );
+};
+
 export {
   initialChatUserDatabase,
   getHighlightChat,
   checkIsChatExist,
   checkIsMessageExist,
   getChat,
+  searchChatByUserName,
 };

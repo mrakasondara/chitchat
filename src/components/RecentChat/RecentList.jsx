@@ -1,6 +1,7 @@
 import RecentItem from "./RecentItem";
 
 const RecentList = ({ chats }) => {
+  console.log(chats);
   return (
     <div className="w-full mt-5 grid gap-[2rem]">
       {chats.length >= 1 &&
