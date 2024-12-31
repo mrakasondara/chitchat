@@ -29,12 +29,16 @@ const createUser = ({ email, password, displayName }) => {
 };
 
 const loginUser = ({ email, password }) => {
-  signInWithEmailAndPassword(auth, email, password)
+  return signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      return userCredential.user;
+      return {
+        error: false,
+        user: userCredential.user,
+        message: "login success",
+      };
     })
     .catch((err) => {
-      return err;
+      return { error: true, message: err };
     });
 };
 
