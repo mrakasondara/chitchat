@@ -28,7 +28,7 @@ app.get("/api/", (req, res) => {
       "Access-Control-Allow-Origin",
       "https://chitchat-snowy.vercel.app/"
     );
-    res.send("server listening").status(200);
+    res.sendFile(__dirname + "../chat-app/index.html").status(200);
   } catch (err) {
     res.send("something error").status(400);
   }
