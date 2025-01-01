@@ -1,0 +1,12 @@
+{
+    "buildCommand": "cd chat-app && npm install && ./node_modules/vite/bin/vite.js build",
+    "outputDirectory": "chat-app/dist",
+    "framework": "vite",
+    "rewrites": [
+      {
+        "source": "/backend/(.*)",
+        "destination": "/backend/src/index.js"
+      },
+      {"source": "/(.*)", "destination": "/"}
+    ]
+  }
