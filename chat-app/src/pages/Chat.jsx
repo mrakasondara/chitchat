@@ -10,7 +10,6 @@ import { AlertError } from "../utils/Alert";
 
 const ENDPOINT = process.env.API_BASE_URL;
 let socket;
-console.log(ENDPOINT);
 const Chat = ({ userId }) => {
   const { id } = useParams();
   const [displayName, setDisplayName] = useState("jane");
