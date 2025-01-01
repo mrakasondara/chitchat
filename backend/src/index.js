@@ -2,9 +2,8 @@ const http = require("http");
 const express = require("express");
 const cors = require("cors");
 const socketio = require("socket.io");
-const { getChat, sendMessage } = require("./utils/firebase/chat/chat");
-const { addImageToStorage } = require("./utils/firebase/storage");
-const { addStatus, getStatuses } = require("./utils/firebase/status/status");
+const { getChat, sendMessage } = require("./firebase/chat/chat");
+const { addStatus, getStatuses } = require("./firebase/status/status");
 
 const app = express();
 const server = http.createServer(app);
