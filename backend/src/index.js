@@ -27,7 +27,10 @@ app.use(
 
 app.get("/", (req, res) => {
   try {
-    res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+    res.header(
+      "Access-Control-Allow-Origin",
+      "https://chitchat-snowy.vercel.app/"
+    );
     res.send("server listening").status(200);
   } catch (err) {
     res.send("something error").status(400);
