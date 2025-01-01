@@ -15,7 +15,7 @@ const Home = () => {
   const [statuses, setStatuses] = useState([]);
   const statusBarProps = { statuses, setStatuses };
   const ENDPOINT = process.env.API_BASE_URL;
-
+  console.log(ENDPOINT);
   useEffect(() => {
     const fetchStatuses = async () => {
       const response = await getStatuses(userInfo.uid);
