@@ -2,10 +2,9 @@ import StatusDataGroup from "./StatusDataGroup";
 import StatusGroupNavigator from "./StatusGroupNavigator";
 
 const ShowStatusItemGroup = ({ id, statuses, groupId }) => {
-  console.log(statuses);
   return (
     <dialog id={`show-status-modal-${id}`} className="modal bg-status">
-      <div className="w-3/4 carousel px-5 rounded-lg">
+      <div className="w-3/4 carousel px-5 max-w-5xl rounded-lg">
         {statuses.map((status, index) => (
           <StatusDataGroup {...status} key={index} />
         ))}

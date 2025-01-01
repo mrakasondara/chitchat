@@ -5,11 +5,15 @@ import {
   getHighlightChat,
   searchChatByUserName,
 } from "../../firebase/chat/chat";
+import { AlertError } from "../../utils/Alert";
+
+const ENDPOINT = process.env.API_BASE_URL;
+
 const RecentChat = () => {
   const { userInfo, searchChatInput, setSearchChatInput } =
     useContext(UserContext);
   const [chats, setChats] = useState({});
-  const [filteredChats, setFilteredChats] = useState({});
+  const [filteredChats, setFilteredChats] = useState([]);
   const [message, setMessage] = useState("");
   const [errorFetch, setErrorFetch] = useState(false);
   useEffect(() => {
@@ -32,9 +36,10 @@ const RecentChat = () => {
     if (userInfo.uid) {
       fetchChat().catch();
     }
-  }, [userInfo, searchChatInput]);
+  }, [ENDPOINT, userInfo, searchChatInput]);
+
   return (
-    <div className=" py-5 px-[1.9rem] rounded-t-xl">
+    <div className="py-5 px-[1.9rem] rounded-t-xl font-poppins">
       <h4 className="text-xl">Recent Chat</h4>
       {searchChatInput != "" && (
         <p className="my-2 alert border-info bg-transparent text-black">
@@ -48,12 +53,14 @@ const RecentChat = () => {
           </button>
         </p>
       )}
-      <Suspense fallback={<p>Loading...</p>}>
-        {errorFetch && (
-          <p className="mt-5 text-2xl text-error font-bold">{message}</p>
-        )}
-        {!errorFetch && <RecentList chats={filteredChats} />}
-      </Suspense>
+      {filteredChats.length >= 1 && (
+        <Suspense fallback={<p>Loading...</p>}>
+          {errorFetch && (
+            <p className="mt-5 text-2xl text-error font-bold">{message}</p>
+          )}
+          {!errorFetch && <RecentList chats={filteredChats} />}
+        </Suspense>
+      )}
     </div>
   );
 };

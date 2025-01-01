@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import useInput from "../../hooks/useInput";
 import { UserContext } from "../../UserContext";
+import { AlertError, AlertSuccess } from "../../utils/Alert";
 
 const AddStatus = ({ addStatus }) => {
   const [image, setImage] = useState(null);
@@ -15,19 +16,29 @@ const AddStatus = ({ addStatus }) => {
 
   const onSelectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
-      setImage(thumb);
+      setImage(null);
       return;
     }
     setImagePath(e.target.files[0]);
     setImage(URL.createObjectURL(e.target.files[0]));
   };
 
-  const addStatusHandler = (e) => {
+  const addStatusHandler = async (e) => {
     e.preventDefault();
-    addStatus({ thumb: imagePath, desc, uid, displayName });
-    setDesc("");
-    setImage(null);
-    document.getElementById("add-status-modal").close();
+    const { error, message } = await addStatus({
+      thumb: imagePath,
+      desc,
+      uid,
+      displayName,
+    });
+    if (error) {
+      AlertError(message);
+    } else {
+      setDesc("");
+      setImage(null);
+      document.getElementById("add-status-modal").close();
+      AlertSuccess(message);
+    }
   };
 
   return (

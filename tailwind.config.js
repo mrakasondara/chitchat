@@ -6,6 +6,7 @@ export default {
     extend: {
       fontFamily: {
         suse: "SUSE",
+        poppins: "Poppins",
       },
       colors: {
         main: "#229799",

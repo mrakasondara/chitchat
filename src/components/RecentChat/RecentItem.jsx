@@ -20,7 +20,7 @@ const RecentItem = ({ displayName, id, lastTime, latestMessage, targetId }) => {
   return (
     <Link
       to={`/chat/${id}`}
-      className="w-full md:w-1/2 md:mx-auto flex gap-2 p-3 md:p-5 shadow-md shadow-main rounded-lg "
+      className="w-full md:w-1/2 md:mx-auto flex gap-2 p-3 md:p-5 shadow-md shadow-slate-300 rounded-lg bg-main"
     >
       <div className="avatar block w-20 items-center">
         <div className="w-20 rounded-full">
@@ -33,12 +33,12 @@ const RecentItem = ({ displayName, id, lastTime, latestMessage, targetId }) => {
           />
         </div>
       </div>
-      <div className="w-full flex flex-col justify-center">
+      <div className="w-full flex flex-col gap-2 justify-center">
         <div className="flex">
-          <h5 className="text-main text-xl font-bold">{displayName}</h5>
+          <h5 className="text-white text-2xl font-bold">{displayName}</h5>
           <span className="ml-auto font-bold text-[10px]">{lastTime}</span>
         </div>
-        <p className="text-black text-[12px]">{latestMessage}</p>
+        <p className="text-white text-[12px] font-suse">{latestMessage}</p>
       </div>
     </Link>
   );

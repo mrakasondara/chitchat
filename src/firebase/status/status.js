@@ -35,20 +35,25 @@ const addStatus = async ({ thumb, desc, uid, displayName }) => {
     id: getKey,
     displayName,
   };
-  if (thumb) {
-    await addImageStatus({ thumb, name: data.thumb });
-  }
+  try {
+    if (thumb) {
+      await addImageStatus({ thumb, name: data.thumb });
+    }
 
-  const setRef = child(rootReference, `statuses/${getKey}`);
-  await set(setRef, data);
-  if (viewList.length >= 1) {
-    viewList.map(async (item) => {
-      await addViewList({
-        userId: item.id,
-        displayName: item.displayName,
-        statusId: getKey,
+    const setRef = child(rootReference, `statuses/${getKey}`);
+    await set(setRef, data);
+    if (viewList.length >= 1) {
+      viewList.map(async (item) => {
+        await addViewList({
+          userId: item.id,
+          displayName: item.displayName,
+          statusId: getKey,
+        });
       });
-    });
+      return { error: false, message: "Status Added" };
+    }
+  } catch (err) {
+    return { error: true, message: "Something Error!" };
   }
 };
 
@@ -110,7 +115,10 @@ const getStatuses = async (userId) => {
     for (const status of filteredStatus) {
       try {
         const response = await fetchStatus(status.statusId);
-        const thumb = await getImageFromStorage(response.thumb);
+        const thumb =
+          response.thumb == "none"
+            ? "none"
+            : await getImageFromStorage(response.thumb);
         const data = {
           ...response,
           thumb,

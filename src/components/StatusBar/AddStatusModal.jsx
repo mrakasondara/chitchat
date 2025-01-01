@@ -13,7 +13,7 @@ const AddStatusModal = () => {
           <IoIosAdd />
         </p>
       </div>
-      <h5 className="text-main font-semibold">Add Status</h5>
+      <h5 className="text-main font-semibold text-center pt-1">Add Status</h5>
     </div>
   );
 };

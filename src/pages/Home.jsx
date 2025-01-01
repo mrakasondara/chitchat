@@ -14,7 +14,7 @@ const Home = () => {
   const { userInfo } = useContext(UserContext);
   const [statuses, setStatuses] = useState([]);
   const statusBarProps = { statuses, setStatuses };
-  const ENDPOINT = "http://localhost:3000/";
+  const ENDPOINT = process.env.API_BASE_URL;
 
   useEffect(() => {
     const fetchStatuses = async () => {

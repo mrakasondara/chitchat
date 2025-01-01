@@ -190,7 +190,9 @@ const getUserThumbData = async (userId) => {
   const dbRef = child(rootReference, `users/${userId}`);
   const dbGet = await get(dbRef);
   const value = dbGet.val();
-  return value.thumb;
+  if (value) {
+    return value.thumb;
+  }
 };
 
 const getUserChatData = async (userId) => {

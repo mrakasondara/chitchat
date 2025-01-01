@@ -6,8 +6,9 @@ import SendMessage from "../components/Chat/SendMessage";
 import { getUserData, getUserThumbData } from "../firebase/user/user";
 import ChatField from "../components/Chat/ChatField";
 import { getImageFromStorage } from "../firebase/storage";
+import { AlertError } from "../utils/Alert";
 
-const ENDPOINT = "http://localhost:3000/";
+const ENDPOINT = process.env.API_BASE_URL;
 let socket;
 
 const Chat = ({ userId }) => {
@@ -42,7 +43,7 @@ const Chat = ({ userId }) => {
 
     socket.emit("join", { userId, targetId, chatId: id }, (error) => {
       if (error) {
-        alert(error);
+        AlertError(error);
       }
       fetchData().catch();
     });

@@ -9,8 +9,8 @@ const TargetMessage = ({ message, time, date }) => {
   return (
     <div className="chat chat-start">
       <div className="chat-bubble bg-main text-white px-5 flex flex-col">
-        <p>{message}</p>
-        <span className="text-[9px] text-slate-50">
+        <p className="text-[17px] font-poppins">{message}</p>
+        <span className="text-[9px] text-slate-50 ml-auto mt-1">
           {isTheDay ? time : `${dateMonthYearMessage} ${time}`}
         </span>
       </div>

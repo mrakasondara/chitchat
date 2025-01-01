@@ -12,7 +12,9 @@ const ChatHeader = ({ displayName, thumb }) => {
           />
         </div>
       </div>
-      <h3 className="text-2xl text-white font-bold">{displayName}</h3>
+      <h3 className="text-2xl text-white font-bold font-poppins">
+        {displayName}
+      </h3>
     </div>
   );
 };
