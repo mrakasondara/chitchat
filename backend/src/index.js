@@ -24,7 +24,7 @@ app.use(
   })
 );
 
-app.get("api/", (req, res) => {
+app.get("/api/", (req, res) => {
   try {
     res.header(
       "Access-Control-Allow-Origin",
